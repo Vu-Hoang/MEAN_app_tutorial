@@ -3,17 +3,16 @@
 <html lang="en">
   <head>
     <base href="/">
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <meta charset    ="utf-8">
+    <meta http-equiv ="X-UA-Compatible" content="IE=edge">
+    <meta name       ="viewport" content="width=device-width, initial-scale=1">
+    <meta name       ="description" content="">
+    <meta name       ="author" content="">
 
     <!-- Cascade Style Sheets -->
     <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="assets/css/animate.css">
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
-
      <!-- Main Angular Files -->
     <script src="assets/js/angular.js"></script>
     <script src="assets/js/angular-route.js"></script>
@@ -25,14 +24,16 @@
 
     <!-- Angular Controllers -->
     <script src="app/controllers/userCtrl.js"></script>
+    <script src="app/controllers/mainCtrl.js"></script>
 
     <!-- Angular Services -->
     <script src="app/services/userServices.js"></script>
+    <script src="app/services/authServices.js"></script>
 
     <title>Theme Template for Bootstrap</title>
   </head>
 
-  <body ng-app="userApp">
+  <body ng-app="userApp" ng-controller="mainCtrl as main">
 
     <!-- Fixed navbar -->
     <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -50,24 +51,26 @@
           <ul class="nav navbar-nav">
             <li class="active"><a href="/">Home</a></li>
             <li><a href="/about">About</a></li>
-            <li><a href="/register">Register</a></li>
+            <li><a ng-show="!main.isLoggedIn" href="/login">Login </a></li>
+            <li><a ng-show="!main.isLoggedIn" href="/register">Register</a></li>
+            <li><a ng-show="main.isLoggedIn" href="#" ng-click = "main.logout()";>Logout</a></li>
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
               <ul class="dropdown-menu">
-                <li><a href="#">Action</a></li>
-                <li><a href="#">Another action</a></li>
-                <li><a href="#">Something else here</a></li>
-                <li role="separator" class="divider"></li>
-                <li class="dropdown-header">Nav header</li>
-                <li><a href="#">Separated link</a></li>
-                <li><a href="#">One more separated link</a></li>
+                <li><a href ="#">Action</a></li>
+                <li><a href ="#">Another action</a></li>
+                <li><a href ="#">Something else here</a></li>
+                <li role    ="separator" class="divider"></li>
+                <li class   ="dropdown-header">Nav header</li>
+                <li><a href ="#">Separated link</a></li>
+                <li><a href ="#">One more separated link</a></li>
               </ul>
             </li>
+            <li><a ng-show="main.isLoggedIn" href="/profile">Hello {{main.username}}</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
     </nav>
-
     <div class="container theme-showcase" role="main">
 
       <!-- Main jumbotron for a primary marketing message or call to action -->
@@ -78,7 +81,6 @@
       <div ng-view></div>
 
     </div> <!-- /container -->
-
 
     <!-- Bootstrap core JavaScript
     ================================================== -->

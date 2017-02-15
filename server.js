@@ -9,6 +9,8 @@ var router = express.Router();
 var appRoutes = require('./app/routes/api')(router);
 var path = require('path');
 
+mongoose.Promise = global.Promise;
+
 app.use(morgan('dev'));
 app.use(bodyParser.json()); // for parsing application/json
 app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded

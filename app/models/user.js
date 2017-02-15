@@ -18,9 +18,13 @@ UserSchema.pre('save', function(next) {
 	});
 });
 
+UserSchema.methods.comparePassword = function(password) {
+  return bcrypt.compareSync(password, this.password);
+};
+
 module.exports = mongoose.model('User', UserSchema);
 
-var blogSchema = new Schema({
+/*var blogSchema = new Schema({
   title:  String,
   author: String,
   body:   String,
@@ -31,4 +35,4 @@ var blogSchema = new Schema({
     votes: Number,
     favs:  Number
   }
-});
+});*/
